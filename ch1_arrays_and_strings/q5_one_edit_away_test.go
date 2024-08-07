@@ -9,20 +9,20 @@ import (
 	"testing"
 )
 
-func TestStringsArePermutation(t *testing.T) {
+func TestStringsOneEditAway(t *testing.T) {
 	testCases := map[string]bool{
-		"listen/silent": true,
-		"earth/heart":   true,
-		"dog/cat":       false,
-		"dog/book":      false,
+		"pale/ple":   true,
+		"pales/pale": true,
+		"pale/bale":  true,
+		"pale/bae":   false,
 	}
 	for twoS, expected := range testCases {
 		t.Run(twoS, func(t *testing.T) {
 			s := strings.Split(twoS, "/")
 			require.Len(t, s, 2)
-			for index, f := range []func(s1, s2 string) bool{
-				ch1_arrays_and_strings.StringsArePermutation1,
-				ch1_arrays_and_strings.StringsArePermutation2,
+			for index, f := range []func(string, string) bool{
+				ch1_arrays_and_strings.StringsOneEditAway1,
+				ch1_arrays_and_strings.StringsOneEditAway2,
 			} {
 				t.Run(strconv.Itoa(index+1), func(t *testing.T) {
 					t.Run("forward", func(t *testing.T) {
